@@ -4,16 +4,16 @@ import java.util.Date;
 
 public class Topic {
     private int topic_id;
-    private String topic_title;
+    private String topic_title;     //√
     private String topic_tag;
-    private String topic_details;
-    private String topic_input;
-    private String topic_output;
-    private String topic_sample_input;
-    private String topic_sample_output;
+    private String topic_details;   //√
+    private String topic_input;     //√
+    private String topic_output;    //√
+    private String topic_sample_input;      //√
+    private String topic_sample_output;     //√
     private String topic_reminder;
-    private Date topic_limit_time;
-    private String topic_limit_memory;
+    private Date topic_limit_time;      //√
+    private String topic_limit_memory;  //√
     private String topic_difficulty;
     private int topic_pass_count;
     private int topic_onload_count;
