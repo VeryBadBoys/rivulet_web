@@ -2,15 +2,15 @@ package com.rivulet.rivulet_oj.entity;
 
 import java.util.Date;
 
-public class User_topic {
+public class UserTopic {
     private int ut_topic_id;
     private Date ut_time;
     private int ut_user_id;
 
-    public User_topic() {
+    public UserTopic() {
     }
 
-    public User_topic(int ut_topic_id, Date ut_time, int ut_user_id) {
+    public UserTopic(int ut_topic_id, Date ut_time, int ut_user_id) {
         this.ut_topic_id = ut_topic_id;
         this.ut_time = ut_time;
         this.ut_user_id = ut_user_id;

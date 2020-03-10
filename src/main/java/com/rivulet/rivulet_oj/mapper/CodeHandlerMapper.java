@@ -2,16 +2,18 @@ package com.rivulet.rivulet_oj.mapper;
 
 import com.rivulet.rivulet_oj.entity.Code;
 import com.rivulet.rivulet_oj.entity.Topic;
-import com.rivulet.rivulet_oj.entity.User_topic;
+import com.rivulet.rivulet_oj.entity.UserTopic;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+
 @Mapper
 @Repository
-public interface ProjectTestMapper {
+public interface CodeHandlerMapper {
 
     /**
      * @sql 查询topic表中所有记录
@@ -25,7 +27,7 @@ public interface ProjectTestMapper {
      * @param userTopic
      */
     @Insert("insert into user_topic (ut_topic_id,ut_user_id,ut_time) values(#{ut_topic_id},#{ut_user_id},#{ut_time})")
-    void addSubmit(User_topic userTopic);
+    void addSubmit(UserTopic userTopic);
 
     /**
      * @sql 保存用户代码
@@ -37,4 +39,9 @@ public interface ProjectTestMapper {
 
     @Select("select * from code where code_id = #{code_id}")
     Code searchCode(int Code_id);
+
+
+
+
+
 }

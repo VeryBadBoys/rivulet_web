@@ -2,9 +2,9 @@ package com.rivulet.rivulet_oj.service.impl;
 
 import com.rivulet.rivulet_oj.entity.Code;
 import com.rivulet.rivulet_oj.entity.Topic;
-import com.rivulet.rivulet_oj.entity.User_topic;
-import com.rivulet.rivulet_oj.mapper.ProjectTestMapper;
-import com.rivulet.rivulet_oj.service.ProjectTestService;
+import com.rivulet.rivulet_oj.entity.UserTopic;
+import com.rivulet.rivulet_oj.mapper.CodeHandlerMapper;
+import com.rivulet.rivulet_oj.service.CodeHandlerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class ProjectTestServiceImpl implements ProjectTestService {
+public class CodeHandlerServiceImpl implements CodeHandlerService {
 
     @Autowired
-    ProjectTestMapper projectTestMapper;
+    CodeHandlerMapper codeHandlerMapper;
 
     @Override
     public String test() {
@@ -31,7 +31,7 @@ public class ProjectTestServiceImpl implements ProjectTestService {
      */
     @Override
     public Topic[] searchTopic(int user_id) {
-        return projectTestMapper.searchTopic();
+        return codeHandlerMapper.searchTopic();
     }
 
     /**
@@ -45,11 +45,11 @@ public class ProjectTestServiceImpl implements ProjectTestService {
     public Map<String, Object> submitCode(int user_id, int topic_id, String code) {
 
         //添加提交记录
-        User_topic user_topic = new User_topic();
+        UserTopic user_topic = new UserTopic();
         user_topic.setUt_user_id(user_id);
         user_topic.setUt_topic_id(topic_id);
         user_topic.setUt_time(new Date());
-        projectTestMapper.addSubmit(user_topic);
+        codeHandlerMapper.addSubmit(user_topic);
 
         //添加代码
         Code addcode = new Code();
@@ -57,7 +57,7 @@ public class ProjectTestServiceImpl implements ProjectTestService {
         addcode.setCode_topic_id(topic_id);
         addcode.setCode_details(code);
         addcode.setCode_state("0");
-        projectTestMapper.addCode(addcode);
+        codeHandlerMapper.addCode(addcode);
         //后期注意通知判题逻辑
 
         Map<String,Object> map = new HashMap<>();
@@ -75,7 +75,7 @@ public class ProjectTestServiceImpl implements ProjectTestService {
      */
     @Override
     public Code searchJudge(int code_id) {
-        return projectTestMapper.searchCode(code_id);
+        return codeHandlerMapper.searchCode(code_id);
     }
 
 }

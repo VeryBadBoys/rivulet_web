@@ -2,26 +2,21 @@ package com.rivulet.rivulet_oj.controller;
 
 import com.rivulet.rivulet_oj.entity.Code;
 import com.rivulet.rivulet_oj.entity.Topic;
-import com.rivulet.rivulet_oj.service.ProjectTestService;
+import com.rivulet.rivulet_oj.expand.judge.JudgeMgr;
+import com.rivulet.rivulet_oj.service.CodeHandlerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
-@RequestMapping("/api/test")
-public class ProjectTestController {
+@RequestMapping("/api/core")
+public class CodeHandlerController {
+
 
     @Autowired
-    ProjectTestService projectTestService;
+    private CodeHandlerService codeHandlerService;
 
-    @GetMapping
-    public String test(){
-        return projectTestService.test();
-    }
 
     /**
      * @apiNote 查询题目
@@ -31,7 +26,7 @@ public class ProjectTestController {
     @GetMapping("/topic/{user_id}")
     public Topic[] searchTopic(@PathVariable("user_id") int user_id)
     {
-        return projectTestService.searchTopic(user_id);
+        return codeHandlerService.searchTopic(user_id);
     }
 
     /**
@@ -46,7 +41,7 @@ public class ProjectTestController {
                        @RequestParam("topic_id") int topic_id,
                        @RequestParam("code") String code)
     {
-        return projectTestService.submitCode(user_id,topic_id,code);
+        return codeHandlerService.submitCode(user_id,topic_id,code);
     }
 
     /**
@@ -58,7 +53,7 @@ public class ProjectTestController {
     public Code searchJudge(@PathVariable("code_id") int code_id)
     {
         System.out.println(code_id);
-        return projectTestService.searchJudge(code_id);
+        return codeHandlerService.searchJudge(code_id);
     }
 
 }
