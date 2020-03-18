@@ -1,6 +1,7 @@
 package com.rivulet.rivulet_oj.service.impl;
 
 import com.rivulet.rivulet_oj.entity.Code;
+import com.rivulet.rivulet_oj.entity.Response;
 import com.rivulet.rivulet_oj.entity.Topic;
 import com.rivulet.rivulet_oj.entity.UserTopic;
 import com.rivulet.rivulet_oj.mapper.CodeHandlerMapper;
@@ -9,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class CodeHandlerServiceImpl implements CodeHandlerService {
@@ -30,8 +29,22 @@ public class CodeHandlerServiceImpl implements CodeHandlerService {
      * @return
      */
     @Override
-    public Topic[] searchTopic(int user_id) {
-        return codeHandlerMapper.searchTopic();
+    public Response searchTopic(int user_id) {
+        Response response = new Response();
+        Topic[] result = codeHandlerMapper.searchTopic();
+        if (result==null)
+        {
+            response.setCode(404);
+            response.setMessage("error");
+            response.setResult(null);
+        }
+        else
+        {
+            response.setCode(200);
+            response.setMessage("success");
+            response.setResult(result);
+        }
+        return response;
     }
 
     /**
@@ -42,8 +55,8 @@ public class CodeHandlerServiceImpl implements CodeHandlerService {
      * @return
      */
     @Override
-    public Map<String, Object> submitCode(int user_id, int topic_id, String code) {
-
+    public Response submitCode(int user_id, int topic_id, String code) {
+        Response response = new Response();
         //添加提交记录
         UserTopic user_topic = new UserTopic();
         user_topic.setUt_user_id(user_id);
@@ -60,11 +73,19 @@ public class CodeHandlerServiceImpl implements CodeHandlerService {
         codeHandlerMapper.addCode(addcode);
         //后期注意通知判题逻辑
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("code",200);
-        map.put("msg","success");
-        map.put("data",addcode.getCode_id());
-        return map;
+        if (addcode.getCode_id()==0)
+        {
+            response.setCode(404);
+            response.setMessage("error");
+            response.setResult(null);
+        }
+        else
+        {
+            response.setCode(200);
+            response.setMessage("success");
+            response.setResult(addcode.getCode_id());
+        }
+        return response;
     }
 
     /**
@@ -74,8 +95,22 @@ public class CodeHandlerServiceImpl implements CodeHandlerService {
      * @return
      */
     @Override
-    public Code searchJudge(int code_id) {
-        return codeHandlerMapper.searchCode(code_id);
+    public Response searchJudge(int code_id) {
+        Response response = new Response();
+        Code result = codeHandlerMapper.searchCode(code_id);
+        if (result==null)
+        {
+            response.setCode(404);
+            response.setMessage("error");
+            response.setResult(null);
+        }
+        else
+        {
+            response.setCode(200);
+            response.setMessage("success");
+            response.setResult(result);
+        }
+        return response;
     }
 
 }

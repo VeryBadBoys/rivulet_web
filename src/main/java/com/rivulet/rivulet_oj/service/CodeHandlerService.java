@@ -1,6 +1,7 @@
 package com.rivulet.rivulet_oj.service;
 
 import com.rivulet.rivulet_oj.entity.Code;
+import com.rivulet.rivulet_oj.entity.Response;
 import com.rivulet.rivulet_oj.entity.Topic;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public interface CodeHandlerService {
      * @param user_id
      * @return
      */
-    Topic[] searchTopic(int user_id);
+    Response searchTopic(int user_id);
 
     /**
      * 提交代码
@@ -24,12 +25,12 @@ public interface CodeHandlerService {
      * @param code
      * @return
      */
-    Map<String,Object> submitCode(int user_id, int topic_id, String code);
+    Response submitCode(int user_id, int topic_id, String code);
 
     /**
      * 查询代码评判结果
      * @param code_id
      * @return
      */
-    Code searchJudge(int code_id);
+    Response searchJudge(int code_id);
 }

@@ -17,12 +17,14 @@ public interface CodeHandlerMapper {
 
     /**
      * @sql 查询topic表中所有记录
+     * @Author 张威龙
      * @return
      */
     @Select("select * from topic")
     Topic[] searchTopic();
 
     /**
+     * @Author 张威龙
      * @sql 添加用户提交信息
      * @param userTopic
      */
@@ -30,6 +32,7 @@ public interface CodeHandlerMapper {
     void addSubmit(UserTopic userTopic);
 
     /**
+     * @Author 张威龙
      * @sql 保存用户代码
      * @param code
      */

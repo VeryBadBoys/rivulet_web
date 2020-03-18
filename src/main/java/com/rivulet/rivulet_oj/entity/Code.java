@@ -1,7 +1,7 @@
 package com.rivulet.rivulet_oj.entity;
 
-public class Code {
 
+public class Code {
     private int code_id;
     private int code_user_id;
     private int code_topic_id;
