@@ -12,12 +12,18 @@ public interface CodeHandlerService {
     String test();
 
     /**
-     * 查询题库中所有题目
+     * 查询题库中所有题目(简略)
      * @param user_id
      * @return
      */
-    Response searchTopic(int user_id);
+    Response searchTopics(int user_id);
 
+    /**
+     * 查询指定题目(根据Topic_id)
+     * @param topic_id
+     * @return
+     */
+    Response searchTopic(int topic_id);
     /**
      * 提交代码
      * @param user_id

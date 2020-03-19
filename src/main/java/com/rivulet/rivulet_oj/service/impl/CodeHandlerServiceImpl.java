@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class CodeHandlerServiceImpl implements CodeHandlerService {
@@ -29,9 +31,44 @@ public class CodeHandlerServiceImpl implements CodeHandlerService {
      * @return
      */
     @Override
-    public Response searchTopic(int user_id) {
+    public Response searchTopics(int user_id) {
         Response response = new Response();
-        Topic[] result = codeHandlerMapper.searchTopic();
+        Topic[] result = codeHandlerMapper.searchTopics();
+        Map<String,Object> [] returnResult = new Map[result.length];
+        if (result==null)
+        {
+            response.setCode(404);
+            response.setMessage("error");
+            response.setResult(null);
+        }
+        else
+        {
+            response.setCode(200);
+            response.setMessage("success");
+            for (int i=0;i<result.length;i++)
+            {
+                returnResult[i] = new HashMap<>();
+                returnResult[i].put("topic_id",result[i].getTopic_id());
+                returnResult[i].put("topic_title",result[i].getTopic_title());
+                returnResult[i].put("topic_tag",result[i].getTopic_tag());
+                returnResult[i].put("topic_difficulty",result[i].getTopic_difficulty());
+                returnResult[i].put("pass_count",result[i].getTopic_pass_count());
+                returnResult[i].put("onload_count",result[i].getTopic_onload_count());
+            }
+            response.setResult(returnResult);
+        }
+        return response;
+    }
+
+    /**
+     * 查询指定题目(根据Topic_id查询)
+     * @param topic_id
+     * @return
+     */
+    @Override
+    public Response searchTopic(int topic_id) {
+        Response response = new Response();
+        Topic result = codeHandlerMapper.searchTopic(topic_id);
         if (result==null)
         {
             response.setCode(404);

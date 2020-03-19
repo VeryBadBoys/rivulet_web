@@ -21,7 +21,11 @@ public interface CodeHandlerMapper {
      * @return
      */
     @Select("select * from topic")
-    Topic[] searchTopic();
+    Topic[] searchTopics();
+
+
+    @Select("select * from topic where topic_id = #{topic_id}")
+    Topic searchTopic(int topic_id);
 
     /**
      * @Author 张威龙

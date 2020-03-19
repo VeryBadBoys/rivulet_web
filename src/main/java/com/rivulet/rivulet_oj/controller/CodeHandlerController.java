@@ -13,16 +13,27 @@ public class CodeHandlerController {
     @Autowired
     private CodeHandlerService codeHandlerService;
 
-
     /**
-     * @apiNote 查询题目
+     * @apiNote 查询所有题目(简略)
      * @param user_id
      * @return
      */
-    @GetMapping("/topic/{user_id}")
-    public Response searchTopic(@PathVariable("user_id") int user_id)
+    @GetMapping("/topics/{user_id}")
+    public Response searchTopics(@PathVariable("user_id") int user_id)
     {
-        return codeHandlerService.searchTopic(user_id);
+        return codeHandlerService.searchTopics(user_id);
+    }
+
+
+    /**
+     * 查询指定题目 (topic_id)
+     * @param topic_id
+     * @return
+     */
+    @GetMapping("/topic/{topic_id}")
+    public Response searchTopic(@PathVariable("topic_id") int topic_id)
+    {
+        return codeHandlerService.searchTopic(topic_id);
     }
 
 
